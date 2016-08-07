@@ -3,12 +3,14 @@
 
     'use strict';
 
+    require('dotenv');
+
     var app,
-    fs = require('fs'),
-    path = require('path'),
-    express = require('express'),
-    GraphicsMagick = require('gm'),
-    markdown = require('github-flavored-markdown').parse;
+        fs = require('fs'),
+        path = require('path'),
+        gmagick = require('gm'),
+        express = require('express'),
+        markdown = require('github-flavored-markdown').parse;
 
     // Create server
     app = express();
@@ -40,11 +42,11 @@
     */
     function getFormat (extension) {
         switch (extension) {
-            case '.jpg':
+        case '.jpg':
             return 'jpeg';
-            case '.gif':
+        case '.gif':
             return 'gif';
-            default:
+         default:
             return 'png';
         }
     }
@@ -58,19 +60,19 @@
             res.render('index', {
                 readme: markdown(data)
             });
-        })
-    })
+        });
+    });
 
     // Create an image
     app.get(/\/(\d+)(?:x((\d+)))?(.\w+)?/, function (req, res, next) {
 
-        var MAX_DIMENSION = 5000
-        , width = req.params[0]
-        , height = req.params[1] || width
-        , colour = req.query.color || req.query.colour || 'ccc'
-        , text = req.query.text || (width + ' x ' + height)
-        , textColour = req.query.textColor || req.query.textColour || '000'
-        , format = getFormat(req.params[2])
+        var MAX_DIMENSION = 5000,
+            width = req.params[0],
+            height = req.params[1] || width,
+            colour = req.query.color || req.query.colour || 'ccc',
+            text = req.query.text || (width + ' x ' + height),
+            textColour = req.query.textColor || req.query.textColour || '000',
+            format = getFormat(req.params[2]);
 
         if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
             var err = new Error('Maximum dimension exceeded (' + MAX_DIMENSION +')')
@@ -78,7 +80,7 @@
             return next(err)
         }
 
-        GraphicsMagick(width, height, '#' + colour)
+        gmagick(width, height, '#' + colour)
         // Center the text
         .gravity('Center')
         // Background colour
