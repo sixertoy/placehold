@@ -11,7 +11,7 @@
         app = express(),
         dimensionMax = 5000,
         defaultColor = 'ccc',
-        defaultTextColor = 'ccc',
+        defaultTextColor = '000',
         regex = new RegExp(/\/(\d+)(?:x((\d+)))?(.\w+)?/);
 
     // if (args.port is found) {
@@ -44,18 +44,17 @@
             width = req.params[0],
             height = req.params[1] || width,
             color = req.query.color || defaultColor,
-            text = (width + ' x ' + height),
-            // req.query.text ||
+            text = req.query.text || (width + ' x ' + height),
             textColor = req.query.textColor || defaultTextColor,
             format = __getFormat(req.params[2]);
-
-        console.log('req.params', req.params);
 
         if (width > dimensionMax || height > dimensionMax) {
             err = new Error('Maximum dimension exceeded (' + dimensionMax + ')');
             err.statusCode = 400;
             return next(err);
         }
+
+        console.log('text', text);
 
         gmagick(width, height, '#' + color)
             // Center the text

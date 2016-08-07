@@ -1,46 +1,12 @@
 # Placeholder image generator
 
-Placeholder image services are useful, which means they get a lot of traffic.
-Lots of traffic means the service gets hammered, and chances are, when you need
-it, it will be down.
-
-The solution? **Run your own**.
-
-You can run this little Express app on your localhost, or on a server, giving
-you your own private service, akin to [placehold.it](http://placehold.it) or [DummyImage](http://dummyimage.com/).
-
-## Running the server
-
-Clone this repo:
-
-```
-git clone git@github.com:bengourley/placeholder.git
-```
-
-Install the npm dependencies:
-
-```
-cd placeholder
-npm install
-```
-
-Install GraphicsMagick. If you are on a Mac (If you are not on a Mac,
-sorry, I can't help!):
 ```
 brew install graphicsmagick
+brew install ghostscript
 ```
 
-Then finally, start the server with:
-
 ```
-node app
-```
-
-By default it will listen on port 9999. You can change this by passing in the
-port as an environment variable:
-
-```
-PORT=1234 node app
+npm install --save-dev placehold
 ```
 
 ## Getting images
@@ -48,10 +14,8 @@ PORT=1234 node app
 Construct a URL like so:
 
 ```
-http:// [hostname]:[port]/[width]x[height] [format] [?query=params]
+http://localhost:[port]/[width]x[height]/[format][?query=params]
 ```
-
-- **hostname** - If you are on your local machine, this will be `localhost`
 
 - **port** - By default this is `9999`. You will know if it is set to something else.
 
@@ -79,11 +43,3 @@ text 'Placeholder'
 and a black background
 
 - `/250` gets you a 250x250 image
-
-## Author
-[Ben Gourley](http://github.com/bengourley)
-
-## Licence
-Licenced under the [New BSD License](http://opensource.org/licenses/bsd-license.php)
-
-[View the source on GitHub](http://github.com/bengourley/placeholder)
