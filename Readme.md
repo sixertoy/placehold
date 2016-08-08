@@ -1,45 +1,77 @@
 # Placeholder image generator
 
-```
+#### Install on Mac
+```bash
 brew install graphicsmagick
 brew install ghostscript
+npm install -g placehold
 ```
 
-```
-npm install --save-dev placehold
-```
+#### Command line
 
-## Getting images
-
-Construct a URL like so:
-
-```
-http://localhost:[port]/[width]x[height]/[format][?query=params]
+Set port using command line option
+```bash
+placehold --port 9999
 ```
 
-- **port** - By default this is `9999`. You will know if it is set to something else.
+Set port using `<my_project>/package.json` property
+```javascript
+{
+  ...
+  "placehold": 9999,
+  ...
+}
+```
+```bash
+cd <my_project>
+placehold
+```
 
-- **width** - The desired image width.
-
-- **height** - The desired image height. If left off, the resulting image will be square: {width} x {width}.
-
-- **format** - This can be `.png`, `.jpg` or `.gif`. It is optional and defaults to `.png`
-
-- **query** - Further options can be specified here:
-
-    `color` - must be a hex value without the `#`. Default is 'ccc'.
-    `textColor` - must be a hex value without the `#`. Default is '000'.
-    `text` - The text to display. Default is '{width} x {height}'.
+Set port using .env file (default)
+```text
+# in <my_project>/.env file
+PLACEHOL_PORT=9999
+```
+```bash
+cd <my_project>
+placehold
+```
 
 ### Examples
 
-- `/400x500` gets you a 400x500 .png with black text and a
-grey background
+**250x250px image file in .png format (default)**
+```html
+http://localhost:<port>/250
+```
 
-- `/480x360.jpg?text=Placeholder` gets you a 480x360 .jpg displaying the
-text 'Placeholder'
+**.gif image file**
+```html
+http://localhost:<port>/400x500.gif
+```
 
-- `/500x100.png?color=000&textColor=fff` gets you a .png with white text
-and a black background
 
-- `/250` gets you a 250x250 image
+**Image file containing the text image 480x320**
+```html
+http://localhost:<port>/480x320.jpg?text=image 480x320
+```
+
+**White text and a red background**
+```html
+http://localhost:<port>/480x320?color=FB1006&textColor=FFF&text=white on red
+```
+
+## URL Options
+
+**Size**
+- width
+- Height - The desired image height. If left off, the resulting image will be square: {width} x {width}.
+
+**File formats**
+- .png (default)
+- .jpg
+- .gif
+
+**Query params** - Further options can be specified here:
+- color - must be a hex value without the `#`. Default is 'ccc'.
+- textColor - must be a hex value without the `#`. Default is '000'.
+- text - The text to display. Default is '{width} x {height}'.

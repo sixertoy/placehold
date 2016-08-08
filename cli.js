@@ -3,25 +3,39 @@
 
     'use strict';
 
-    var gmagick = require('gm'),
+    var path = require('path'),
+        gmagick = require('gm'),
         express = require('express'),
+        argv = require('yargs').argv,
         lookuproot = require('lookuproot'),
         // variables
-        APP_PORT,
+        APP_PORT, pkg,
         app = express(),
         dimensionMax = 5000,
-        defaultColor = 'ccc',
+        defaultColor = 'CCC',
         defaultTextColor = '000',
         regex = new RegExp(/\/(\d+)(?:x((\d+)))?(.\w+)?/);
 
-    // if (args.port is found) {
-    // APP_PORT = args
-    // } else {
-    require('dotenv').config({
-        path: lookuproot('.env')
-    });
-    APP_PORT = process.env.PLACEHOLD_PORT;
-    // }
+    if (argv.hasOwnProperty('port') && (typeof argv.port === 'number') && argv.port) {
+        // if use command line option --port
+        APP_PORT = argv.port;
+    } else {
+        try {
+            // in package.json
+            pkg = path.join(process.cwd(), 'package.json');
+            pkg = require(pkg);
+            if (!pkg.hasOwnProperty('placehold')) {
+                throw new Error('no property `placehold` in current package.json');
+            }
+            APP_PORT = pkg.placehold;
+        } catch (e) {
+            // check .env file project > user's home > module directory
+            require('dotenv').config({
+                path: lookuproot('.env')
+            });
+            APP_PORT = process.env.PLACEHOLD_PORT;
+        }
+    }
 
     /**
     *
@@ -86,8 +100,8 @@
         return true;
     });
 
-
     app.listen(APP_PORT, function __onRunning__ () {
+        // eslint-disable-next-line
         console.log('Placeholder image server running at: http://localhost:' + APP_PORT);
     });
 

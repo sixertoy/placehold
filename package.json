@@ -3,20 +3,21 @@
   "version": "0.1.0",
   "description": "NodeJS local placehold.it server",
   "main": "index.js",
+  "preferGlobal": true,
   "bin": {
     "placehold": "./bin/placehold"
   },
   "files": [
     ".env",
-    "index.js",
+    "cli.js",
     "bin/placehold"
   ],
   "dependencies": {
-    "dotenv": "^2.0.0",
+    "dotenv": "2.0.0",
     "express": "4.14.0",
     "gm": "1.23.0",
-    "lookuproot": "^0.1.5",
-    "yargs": "^4.8.1"
+    "lookuproot": "0.1.5",
+    "yargs": "4.8.1"
   },
   "devDependencies": {},
   "scripts": {
