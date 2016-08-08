@@ -54,8 +54,6 @@
             return next(err);
         }
 
-        console.log('text', text);
-
         gmagick(width, height, '#' + color)
             // Center the text
             .gravity('Center')
