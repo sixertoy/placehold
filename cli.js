@@ -25,7 +25,7 @@
             pkg = path.join(process.cwd(), 'package.json');
             pkg = require(pkg);
             if (!pkg.hasOwnProperty('placehold')) {
-                throw new Error('no property `placehold` in current package.json');
+                throw new Error('No property `placehold` in current package.json');
             }
             APP_PORT = pkg.placehold;
         } catch (e) {
