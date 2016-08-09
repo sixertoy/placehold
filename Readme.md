@@ -1,15 +1,27 @@
-# Placeholder image generator
+# Dummies images server generator
 
-#### Install on Mac
+### Install on Mac
+
+ghostscript and graphicsmagick library are required to run placeholder server
 ```bash
 brew install graphicsmagick
 brew install ghostscript
+```
+
+Install module via NPM command line
+```bash
 npm install -g placehold
 ```
 
-#### Command line
+### Serving dummy image file
 
-Set port using command line option
+> placehold needs to have a port to listen to
+you can set this value by:
+- a command line argument
+- settings a property in your project's package.json file
+- define a variable in a .env file `project > home > module directories`
+
+##### Set port using command line option
 ```bash
 placehold --port 9999
 ```
@@ -37,6 +49,32 @@ cd <my_project>
 placehold
 ```
 
+### Images Options
+
+#### Size (required)
+
+`width` is the only one options required
+If `height` options is left off, the resulting image will be square: `{width x width}`.
+
+
+#### Optionnals query params
+
+**Intext image**
+
+> Use `text` in a query params string to set an intext image
+Default text value is image's size `{width x height}`
+
+**Text color**
+
+> Text color, a hex value without the `#`, default value is set to 'CCC'
+
+- Background color
+
+- File formats
+  - `.png` (default)
+  - `.jpg`
+  - `.gif`
+
 ### Examples
 
 **250x250px image file in .png format (default)**
@@ -62,16 +100,7 @@ http://localhost:<port>/480x320?color=FB1006&textColor=FFF&text=white on red
 
 ## URL Options
 
-**Size**
-- width
-- Height - The desired image height. If left off, the resulting image will be square: {width} x {width}.
-
-**File formats**
-- .png (default)
-- .jpg
-- .gif
-
-**Query params** - Further options can be specified here:
-- color - must be a hex value without the `#`. Default is 'ccc'.
+ - Further options can be specified here:
+- color - .
 - textColor - must be a hex value without the `#`. Default is '000'.
 - text - The text to display. Default is '{width} x {height}'.
