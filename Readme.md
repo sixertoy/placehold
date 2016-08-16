@@ -42,7 +42,7 @@ placehold
 Set port using .env file (default)
 ```text
 # in <my_project>/.env file
-PLACEHOL_PORT=9999
+PLACEHOLD_PORT=9999
 ```
 ```bash
 cd <my_project>
