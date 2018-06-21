@@ -14,7 +14,7 @@ brew install ghostscript
 Install module via NPM command line
 
 ```bash
-npm install -g placehold
+npm install -g https://github.com/sixertoy/placehold.git
 ```
 
 ## Usages
@@ -42,7 +42,7 @@ Set port using `<my_project>/package.json` property
   "placehold": 9999,
   ...
 }
-```
+``` 
 
 ```bash
 cd <my_project>
