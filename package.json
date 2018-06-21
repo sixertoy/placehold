@@ -9,6 +9,13 @@
   "bin": {
     "placehold": "./bin/placehold"
   },
+  "files": [
+    "./index.js",
+    "./bin/placehold",
+    "./src/has",
+    "./src/upload-file",
+    "./src/dummy-image"
+  ],
   "dependencies": {
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
