@@ -2,20 +2,19 @@
   "name": "placehold",
   "description": "All Fake Servers in One - Upload + Dummies",
   "license": "ISC",
-  "main": "index.js",
   "version": "0.2.0",
+  "main": "./index.js",
   "preferGlobal": true,
   "author": "Matthieu Lassalvy",
+  "repository": "sixertoy/placehold",
   "bin": {
     "placehold": "./bin/placehold"
   },
   "files": [
     ".env",
-    "./index.js",
-    "./bin/placehold",
-    "./src/has",
-    "./src/upload-file",
-    "./src/dummy-image"
+    "./src/",
+    "./bin/",
+    "./index.js"
   ],
   "dependencies": {
     "cors": "^2.8.4",
