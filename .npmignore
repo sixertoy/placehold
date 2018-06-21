@@ -1,3 +1,5 @@
 node_modules
 .editorconfig
 .eslintrc.json
+.prettierignore
+.prettierrc.json
