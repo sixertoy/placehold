@@ -1,36 +1,33 @@
 {
-  "name": "placeholder",
-  "version": "0.1.0",
-  "description": "NodeJS local placehold.it server",
+  "name": "placehold",
+  "version": "0.2.0",
+  "description": "All Fake Servers in One - Upload + Dummies",
   "main": "index.js",
   "preferGlobal": true,
-  "bin": {
-    "placehold": "./bin/placehold"
-  },
-  "files": [
-    ".env",
-    "cli.js",
-    "bin/placehold"
-  ],
+  "license": "ISC",
+  "author": "Matthieu Lassalvy",
   "dependencies": {
+    "cors": "^2.8.4",
     "dotenv": "2.0.0",
-    "express": "4.14.0",
+    "express": "^4.16.3",
+    "express-fileupload": "^0.4.0",
     "gm": "1.23.0",
+    "image-size": "^0.6.3",
     "lookuproot": "0.1.5",
     "yargs": "4.8.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
+    "husky": "0.14.3",
+    "prettier": "1.13.5",
+    "prettier-eslint": "8.8.1",
+    "pretty-quick": "1.6.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/sixertoy/placeholder.git"
-  },
-  "author": "Mathhieu Lassalvy",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sixertoy/placeholder/issues"
-  },
-  "homepage": "https://github.com/sixertoy/placeholder#readme"
+  }
 }
