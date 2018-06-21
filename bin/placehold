@@ -1,3 +1,2 @@
 #!/usr/bin/env node
-/* global require */
-require('./../cli.js');
+require('./../index.js');

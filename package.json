@@ -1,20 +1,23 @@
 {
   "name": "placehold",
-  "version": "0.2.0",
   "description": "All Fake Servers in One - Upload + Dummies",
-  "main": "index.js",
-  "preferGlobal": true,
   "license": "ISC",
+  "main": "index.js",
+  "version": "0.2.0",
+  "preferGlobal": true,
   "author": "Matthieu Lassalvy",
+  "bin": {
+    "placehold": "./bin/placehold"
+  },
   "dependencies": {
     "cors": "^2.8.4",
-    "dotenv": "2.0.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-fileupload": "^0.4.0",
-    "gm": "1.23.0",
+    "gm": "^1.23.1",
     "image-size": "^0.6.3",
-    "lookuproot": "0.1.5",
-    "yargs": "4.8.1"
+    "lookuproot": "^0.2.1",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

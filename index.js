@@ -1,44 +1,57 @@
 const path = require('path');
 const cors = require('cors');
+const { argv } = require('yargs');
 const express = require('express');
-const sizeOf = require('image-size');
+const lookuproot = require('lookuproot');
 const fileUpload = require('express-fileupload');
 
-const app = express();
+// application
+const has = require('./src/has');
 
-// middlewares
+// default port defined to 2900 in placehold/.env file
+let port = (has(argv, 'port') && typeof argv.port === 'number' && argv.port) || null;
+
+if (!port) {
+  try {
+    /* -----------------------------------
+
+    Looking for a package.json file
+    In the current command path
+
+    ----------------------------------- */
+    let pkg = path.join(process.cwd(), 'package.json');
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    pkg = require(pkg);
+    if (!has(pkg, 'placehold')) {
+      throw new Error('No property `placehold` in current package.json');
+    }
+    port = pkg.placehold;
+  } catch (e) {
+    /* -----------------------------------
+
+    Looking for an .env file
+    In the current command path
+
+    ----------------------------------- */
+    // check .env file project > user's home > module directory
+    const envfile = lookuproot('.env');
+    // eslint-disable-next-line global-require
+    require('dotenv').config({ path: envfile });
+    port = process.env.PLACEHOLD_PORT;
+  }
+}
+
+const app = express();
 app.use(cors());
 app.use(fileUpload());
 
-const port = 2900;
-const uploadfolder = 'upload';
 const serveruri = `http://localhost:${port}`;
-const uploadpath = path.join(__dirname, uploadfolder);
+const dummyRouteRegex = new RegExp(/\/(\d+)(?:x((\d+)))?(.\w+)?/);
 
 app.use(express.static(__dirname));
-
-app.post('/upload', (req, res) => {
-  if (!req.files) return res.status(400).send('Unable to upload files, missing parameters');
-  const timestamp = Date.now();
-  const fieldname = req.params[0] || 'file';
-  const fileobject = req.files[fieldname];
-  const fileextension = path.extname(fileobject.name);
-  const outputfilename = `image_${timestamp}${fileextension}`;
-  const outputpath = path.join(uploadpath, outputfilename);
-  fileobject.mv(outputpath, (err) => {
-    if (err) return res.status(500).send(err);
-    const dimensions = sizeOf(outputpath);
-    const result = {
-      dimensions,
-      root: `${uploadpath}`,
-      filename: outputfilename,
-      path: `${uploadpath}${path.sep}${outputfilename}`,
-      uri: `${serveruri}/${uploadfolder}/${outputfilename}`,
-    };
-    res.send(result);
-  });
-});
+app.post('/upload', require('./src/upload-file'));
+app.get(dummyRouteRegex, require('./src/dummy-image'));
 
 app.listen(port, () => {
-  console.log(`Placehold server running on port ${serveruri}`);
+  process.stdout.write(`Placehold server running on port ${serveruri}`);
 });
