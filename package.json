@@ -6,7 +6,10 @@
   "main": "./index.js",
   "preferGlobal": true,
   "author": "Matthieu Lassalvy",
-  "repository": "sixertoy/placehold",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sixertoy/placehold"
+  },
   "bin": {
     "placehold": "./bin/placehold"
   },
